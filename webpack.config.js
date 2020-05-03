@@ -5,7 +5,7 @@ const APP_DIR = path.resolve(__dirname, 'src')
 module.exports = {
   entry: APP_DIR + '/index.jsx',
   resolve: {
-    extensions: [".js", ".jsx", ".css"]
+    extensions: [".js", ".jsx", ".scss"]
   },
   module: {
     rules:[
@@ -24,6 +24,17 @@ module.exports = {
             loader: 'html-loader'
           }
         ]
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'sass-loader',
+        ],
       }
     ]
   },
