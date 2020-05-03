@@ -11,13 +11,14 @@ function App() {
   const isLoading = useSelector(state => state.product.isLoading)
   const products = useSelector(state => state.product.products)
   const page = useSelector(state => state.product.page)
+  const total = useSelector(state => state.product.productCount)
 
   useEffect(() => {
     dispatch(loadProducts({ page, limit: LIMIT }))
   },[page])
 
   window.onscroll = () => {
-    if (products.length < 500 && window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+    if (products.length < total && window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
       if (!isLoading) {
         dispatch(incrementPage())
       }
@@ -29,6 +30,7 @@ function App() {
       <div className="container">
         {products && <ProductList products={products} />}
         {isLoading && <Loading />}
+        {products.length === total && <div className="text-center"><p className="lead text-muted">~ end of catalogue ~</p></div> }
       </div>
     </div>
   )

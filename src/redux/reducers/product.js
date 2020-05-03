@@ -4,7 +4,8 @@ const initialState = {
   products: [],
   isLoading: null,
   error: '',
-  page: 1
+  page: 1,
+  productCount: 500
 }
 
 export default function(state = initialState, action) {
