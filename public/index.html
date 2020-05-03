@@ -2,18 +2,38 @@
 <html>
     <head>
         <title>Products Grid</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     </head>
     <body>
         <header>
-            <h1>Products Grid</h1>
-
-            <p>Here you're sure to find a bargain on some of the finest ascii available to purchase. Be sure to peruse our selection of ascii faces in an exciting range of sizes and prices.</p>
-
-            <p>But first, a word from our sponsors:</p> <script>document.write('<img class="ad" src="/ads/?r=' + Math.floor(Math.random()*1000) + '"/>');</script>
+            <div class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                <div class="container d-flex justify-content-between">
+                    <a class="navbar-brand" href="/">
+                        <i class="fa fa-smile-o" aria-hidden="true"></i>
+                        <span>Face Store</span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </div>
         </header>
-
-        <section class="products">
-            ... products go here ...
-        </section>
+        <main role="main">
+            <section class="jumbotron text-center">
+                <div class="container">
+                    <h1>Products Grid</h1>
+                    <p class="lead text-muted">Here you're sure to find a bargain on some of the finest ascii available to purchase. Be sure to peruse our selection of ascii faces in an exciting range of sizes and prices.</p>
+                </div>
+            </section>
+            <!--
+            <header>
+                <p>But first, a word from our sponsors:</p> <script>document.write('<img class="ad" src="/ads/?r=' + Math.floor(Math.random()*1000) + '"/>');</script>
+            </header>
+            -->
+            <section class="products">
+                ... products go here ...
+            </section>
+        </main>
     </body>
 </html>
