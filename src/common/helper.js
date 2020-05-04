@@ -24,3 +24,7 @@ export const parseDateIntoRelativeTime = (dateAdded) => {
   }
   return added
 }
+
+export const generateRandomNumbers = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}

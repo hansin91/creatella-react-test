@@ -14,7 +14,8 @@ const initialState = {
   page: 1,
   productCount: 500,
   isSorted: false,
-  isSortingLoading: false
+  isSortingLoading: false,
+  adKeys: []
 }
 
 export default function(state = initialState, action) {
