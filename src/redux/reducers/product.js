@@ -5,6 +5,8 @@ import {
   INCREMENT_PAGE,
   SET_PRODUCT_SORTED,
   SET_IS_SORTING_LOADING,
+  SET_TOTAL_PRODUCTS,
+  SET_PREVIOUS_ADS_ID,
   SET_IS_SORTED } from '../actions'
 
 const initialState = {
@@ -12,14 +14,24 @@ const initialState = {
   isLoading: null,
   error: '',
   page: 1,
-  productCount: 500,
+  productCount: 0,
   isSorted: false,
   isSortingLoading: false,
-  adKeys: []
+  previousAdsId: 0
 }
 
 export default function(state = initialState, action) {
   switch(action.type) {
+    case SET_PREVIOUS_ADS_ID:
+      return {
+        ...state,
+        previousAdsId: action.payload
+      }
+    case SET_TOTAL_PRODUCTS:
+      return {
+        ...state,
+        productCount: action.payload
+      }
     case SET_IS_SORTING_LOADING:
       return {
         ...state,

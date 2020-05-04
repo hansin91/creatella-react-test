@@ -1,30 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { generateRandomNumbers } from '../common/helper'
 import { BASE_URL } from '../common/config'
+import { setPreviousAdsId } from '../redux/actions'
 
 function Ads() {
-  const adKeys = useSelector(state => state.product.adKeys)
-  const [randomAdKey, setRandomAdKey] = useState(0)
+  const previousAdsId = useSelector(state => state.product.previousAdsId)
+  const [adsId, setAdsId] = useState(0)
+  const dispatch = useDispatch()
   const [loadingAds, setLoadingAds] = useState(true)
   useEffect(() => {
-    let randomKey = ''
+    let randomAdsId = 0
      do {
-      randomKey = generateRandomNumbers(1, 1000)
-      const isContain = adKeys.includes(randomKey)
-      if (!isContain) {
-        adKeys.push(randomKey)
-        setRandomAdKey(randomKey)
-        setLoadingAds(false)
-      }
-     }
-    while (!adKeys.includes(randomKey))
+      randomAdsId = generateRandomNumbers(1, 1000)
+      setAdsId(randomAdsId)
+      dispatch(setPreviousAdsId(parseInt(randomAdsId)))
+      setLoadingAds(false)
+    }
+    while (previousAdsId === randomAdsId)
   },[])
 
   return (
     <div className="col-md-12 text-center ads">
       {loadingAds && <div>Loading ....</div>}
-      {!loadingAds && randomAdKey && <img src={BASE_URL + "ads/?r=" + randomAdKey} />}
+      {!loadingAds && adsId && <img src={BASE_URL + "ads/?r=" + adsId} />}
     </div>
   )
 }

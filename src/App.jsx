@@ -83,7 +83,7 @@ function App() {
         {isSortingLoading && <Loading />}
         {products && !isSortingLoading && <ProductList products={products} />}
         {isLoading && <Loading />}
-        {products.length === total && <div className="text-center"><p className="lead text-muted">~ end of catalogue ~</p></div> }
+        {!isLoading && products.length === total && <div className="text-center"><p className="lead text-muted">~ end of catalogue ~</p></div> }
       </div>
     </div>
   )

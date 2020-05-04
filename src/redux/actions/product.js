@@ -5,7 +5,9 @@ import {
   INCREMENT_PAGE,
   SET_PRODUCT_SORTED,
   SET_IS_SORTED,
-  SET_IS_SORTING_LOADING
+  SET_IS_SORTING_LOADING,
+  SET_TOTAL_PRODUCTS,
+  SET_PREVIOUS_ADS_ID
 } from './types'
 import api from '../../common/api'
 
@@ -34,6 +36,11 @@ const setIsSortingLoading = (value) => ({
   payload: value
 })
 
+const setTotalProducts = (value) => ({
+  type: SET_TOTAL_PRODUCTS,
+  payload: value
+})
+
 export const setIsSorted = (value) => ({
   type: SET_IS_SORTED,
   payload: value
@@ -43,19 +50,29 @@ export const incrementPage = () =>({
   type: INCREMENT_PAGE
 })
 
+export const setPreviousAdsId = (value) => ({
+  type: SET_PREVIOUS_ADS_ID,
+  payload: value
+})
+
 export const loadProducts = (params) => (dispatch) => {
   dispatch(setLoading(true))
   const page = params.page
   const limit = params.limit
   const sort = params.sort
+  let url = 'api/products?_page='+page+'&_limit='+limit
+  if (sort) {
+    url += '&_sort='+ sort
+  }
   api({
     method: 'GET',
-    url: 'api/products?_page='+page+'&_limit='+limit+'&_sort='+ sort,
+    url,
     responseType: 'json'
   })
-  .then(({ data }) => {
+  .then((res) => {
+    dispatch(setTotalProducts(parseInt(res.headers['x-total-count'])))
     dispatch(setError(''))
-    dispatch(setProducts(data))
+    dispatch(setProducts(res.data))
   })
   .catch((err) => dispatch(err.response.data))
   .finally((_) => dispatch(setLoading(false)))
@@ -66,14 +83,19 @@ export const sortProducts = (params) => (dispatch) => {
   const page = params.page
   const limit = params.limit
   const sort = params.sort
+  let url = 'api/products?_page='+page+'&_limit='+limit
+  if (sort) {
+    url += '&_sort='+ sort
+  }
   api({
     method: 'GET',
-    url: 'api/products?_page='+page+'&_limit='+limit+'&_sort='+ sort,
+    url,
     responseType: 'json'
   })
-  .then(({ data }) => {
+  .then((res) => {
+    dispatch(setTotalProducts(parseInt(res.headers['x-total-count'])))
     dispatch(setError(''))
-    dispatch(setProductSorted(data))
+    dispatch(setProductSorted(res.data))
   })
   .catch((err) => dispatch(err.response.data))
   .finally((_) => dispatch(setIsSortingLoading(false)))
